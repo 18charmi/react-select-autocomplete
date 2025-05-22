@@ -52,3 +52,10 @@ export default tseslint.config({
   },
 })
 ```
+
+
+Custom autocomplete using react-select
+
+[✓] vite project
+[✓] setup tailwind
+[] setup restapi/graphql
