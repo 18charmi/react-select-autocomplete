@@ -13,7 +13,7 @@ function Header() {
                 </a>
                 <h2 className='text-start'>Searchable Autocomplete using react-select</h2>
 
-                <Autocomplete placeholder="Search..." handleSelection={handleSelection} isClearable/>
+                <Autocomplete placeholder="Search colors..." handleSelection={handleSelection} isClearable/>
 
             </header>
             {!!selection &&
