@@ -1,62 +1,81 @@
-# React + TypeScript + Vite
+# 🔍 React + TypeScript + TailwindCSS + Vite — Searchable Autocomplete Component
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully customizable, accessible, and async-powered **autocomplete input** built with `react-select`, `TypeScript`, `TailwindCSS`, and `Vite`.
 
-Currently, two official plugins are available:
+This component supports real-time option fetching, controlled selection handling, keyboard accessibility, and full theming using TailwindCSS — making it a perfect fit for modern React applications.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **🔄 Dynamic Option Fetching**  
+  Fetch options on-the-fly based on user input (ideal for APIs, large datasets, etc.).
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **♿ Keyboard Accessibility**  
+  Fully navigable and selectable using keyboard, thanks to `react-select`'s accessibility features.
+
+- **📤 Controlled Component**  
+  Easily manage selected values from the parent component using props and callbacks.
+
+- **🎨 TailwindCSS for Styling**  
+  Built using utility-first TailwindCSS classes for simple yet clean UI customization.
+
+- **🧠 Written in TypeScript**  
+  Fully typed for a smooth and safe development experience.
+
+- **⚡ Fast Development**  
+  Bootstrapped using **Vite** for lightning-fast builds and HMR.
+
+---
+
+## 🚀 Tech Stack
+
+- React
+- TypeScript
+- Vite
+- TailwindCSS
+- react-select
+
+---
+
+## 📁 Project Setup
+
+```bash
+git clone https://github.com/18charmi/react-select-autocomplete
+cd react-select-autocomplete
+npm install
+npm run dev
+````
+
+---
+
+## 🔧 Usage
+
+Import the `Autocomplete` component and use it with your custom fetch function and value handler:
+
+```tsx
+<Autocomplete
+  loadOptions={yourAsyncFunction}
+  onChange={handleSelection}
+  placeholder="Search..."
+  isClearable
+/>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Customize the `components`, `styles`, or props to match your use case. Refer to the examples in the repo for guidance.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 📌 To Do
 
+* [x] Vite project setup
+* [x] TailwindCSS integration
+* [x] `react-select` autocomplete customization
+* [ ] REST API / GraphQL data integration examples
 
-Custom autocomplete using react-select
+---
 
-[✓] vite project
-[✓] setup tailwind
-[✓] setup react-select with custom autocomplete component
-[] setup restapi/graphql
+## 📷 Demo
+
+Watch the demo video on YouTube:
+📺 [React Autocomplete Component Demo](https://youtu.be/Bbo-5aHNwgA)
