@@ -58,4 +58,5 @@ Custom autocomplete using react-select
 
 [✓] vite project
 [✓] setup tailwind
+[✓] setup react-select with custom autocomplete component
 [] setup restapi/graphql
