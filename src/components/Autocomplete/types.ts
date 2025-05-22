@@ -12,5 +12,5 @@ export interface AutocompleteProps extends Partial<Props<OptionType, false>> {
 }
 
 export type AutocompleteType = React.FC<
-	Pick<AutocompleteProps, "placeholder" | "name" | "dropdownIcon" | "handleSelection">
+	Pick<AutocompleteProps, "placeholder" | "name" | "dropdownIcon" | "handleSelection" | "isClearable">
 > & {};

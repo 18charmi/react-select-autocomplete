@@ -22,17 +22,17 @@ const Autocomplete: AutocompleteType = ({ dropdownIcon, handleSelection = () => 
 	const [inputValue, setInputValue] = useState("");
 	const [selectedOption, setSelectedOption] = useState<{ value: string; label: string } | null>(null);
 
-	const { loading, handleSearch } = useAutocompleteSearch();
+	const { loading, handleSearch, hasNoResults, lastFetchedOptions } = useAutocompleteSearch();
 
 	const selectRef = useRef<SelectInstance<OptionType> | null>(null);
-	const handleChange = (selected: SingleValue<OptionType> | MultiValue<OptionType>) => {
+	const onChange = (selected: SingleValue<OptionType> | MultiValue<OptionType>) => {
 		const opt = selected as OptionType;
 		setSelectedOption(opt);
 		setInputValue(opt ? opt.label : ""); // Ensure the input shows selected value
 		handleSelection(opt);
 	};
 
-	const handleInputChange = (inputValue: string, { action }: InputActionMeta) => {
+	const onInputChange = (inputValue: string, { action }: InputActionMeta) => {
 		if (action === "input-change") {
 			setInputValue(inputValue);
 			if (inputValue.trim().length == 0 && selectedOption) {
@@ -46,6 +46,11 @@ const Autocomplete: AutocompleteType = ({ dropdownIcon, handleSelection = () => 
 			handleSelection({ value: inputValue, label: inputValue });
 		}
 	};
+
+	const showNoOptions = hasNoResults && inputValue.trim().length > 0;
+	const defaultOptions = inputValue.trim().length > 0
+		? lastFetchedOptions
+		: [];
 
 	return (
 		<AsyncSelect<OptionType>
@@ -62,7 +67,10 @@ const Autocomplete: AutocompleteType = ({ dropdownIcon, handleSelection = () => 
 					primary75: "var(--color-cyan-300)",
 				},
 			})}
-			defaultOptions
+			defaultOptions={defaultOptions}
+			noOptionsMessage={() =>
+				showNoOptions ? `No options found for "${inputValue}"` : null
+			}
 			cacheOptions
 			loadOptions={handleSearch}
 			isLoading={loading}
@@ -72,13 +80,12 @@ const Autocomplete: AutocompleteType = ({ dropdownIcon, handleSelection = () => 
 				IndicatorSeparator: () => null,
 				Option: CustomOptionView,
 			}}
-			noOptionsMessage={() => `No options found for ${inputValue}`}
 			classNames={customClassNames}
 			onKeyDown={handleKeyDown}
 			{...props}
 			inputValue={inputValue}
-			onInputChange={handleInputChange}
-			onChange={handleChange}
+			onInputChange={onInputChange}
+			onChange={onChange}
 			value={selectedOption}
 		/>
 	);

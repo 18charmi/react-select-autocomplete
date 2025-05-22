@@ -10,22 +10,28 @@ const filterFn = (inputValue: string) => {
 };
 
 export const useAutocompleteSearch = () => {
-	const [fetching, setFetching] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false);
+	const [hasNoResults, setHasNoResults] = useState(false);
+	const [lastFetchedOptions, setLastFetchedOptions] = useState<OptionType[]>([...colourOptions]);
 
-	const search = useCallback(
+
+	const handleSearch = useCallback(
 		debounce((inputValue: string, callback: (options: OptionType[]) => void) => {
 			if (!inputValue.trim()) {
-				callback([]); // providing default options
+				setHasNoResults(false);
+				callback([]);
 				return;
 			}
 
-			setFetching(true);
+			setLoading(true);
 
 			// mocking the response of options
 			setTimeout(() => {
 				const filtered = filterFn(inputValue);
 				callback(filtered);
-				setFetching(false);
+				setLastFetchedOptions(filtered);
+				setHasNoResults(!filtered.length);
+				setLoading(false);
 			}, 1000);
 
 			// TODO: work with actual api
@@ -42,10 +48,10 @@ export const useAutocompleteSearch = () => {
 			// 		console.error("Error fetching autocomplete search list", e);
 			// 		callback([]);
 			// 	})
-			// 	.finally(() => setFetching(false));
+			// 	.finally(() => setLoading(false));
 		}, 300), // Debounce delay
 		[],
 	);
 
-	return { handleSearch: search, loading: fetching };
+	return { handleSearch, loading, hasNoResults, lastFetchedOptions };
 };
